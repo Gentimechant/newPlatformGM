@@ -1,0 +1,117 @@
+body{
+    background-color: black;
+  }
+  .container{
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    /* padding: 20px 0px 20px 0px; */
+    border: solid grey 1px; /* à retirer */
+    /* background-color: red; */
+  
+  }
+  
+  .avatar{
+    width: auto;
+    height: 140px;
+    /* border:solid grey 1px ; // à retirer */
+  }
+  .descriptif{
+    width: auto;
+    height: 310px;
+    border:solid grey 1px ; /* à retirer */
+  }
+  
+  button{
+    display: inline-block;
+    color: #bd986b;
+    width: 120px;
+    height: 40px;
+    margin: 10px 0 0 50px;
+    background-image: url(img/button.png);
+  }
+  #player1{
+    width: 400px;
+    height: 540px;
+    border:solid grey 1px ; /* à retirer */
+    margin-left: 20px;
+    /* padding: 80px; */
+    float: left;
+    background-image: url(img/bgplayer1.png);
+  }
+  
+  #player2{
+    width: 400px; /* 320 */
+    height: 540px; /* 460 */
+    border: 1px solid grey; /* à retirer */
+    margin-right: 20px;
+    float: left;
+    background-image: url(img/bgplayer2.png);
+  }
+  #board{
+    float: left;
+    margin: 0px 30px;
+  }
+  .square {
+      background-image: url(img/case.jpg);
+      width: 50px;
+      height: 50px;
+  }
+  
+  .square-inaccessible {
+      background: url(img/obstacle.png);
+  }
+  
+  .availableCase {
+      background-image: url(img/availableCase.png);
+  }
+  
+  
+  .square-character1 {
+      background: url(img/player1.png);
+  }
+  
+  .square-character2 {
+    background: url(img/player2.png);
+  }
+  
+  
+  [weapon="sword"] {
+      background: url(img/sword1.png);
+  }
+  
+  [weapon="shovel"] {
+      background: url(img/shovel.png);
+  }
+  
+  [weapon="hammer"] {
+      background: url(img/hammer.png);
+  }
+  
+  [weapon="axe"] {
+      background: url(img/axe.png);
+  }
+
+  [weapon="melee"] {
+    background: url(img/melee.png);
+  }
+
+  [weapon="swordAvailable"] {
+    background: url(img/swordAvailable.png);
+  }
+  
+  [weapon="shovelAvailable"] {
+    background: url(img/shovelAvailable.png);
+  }
+  
+  [weapon="hammerAvailable"] {
+    background: url(img/hammerAvailable.png);
+  }
+  
+  [weapon="axeAvailable"] {
+    background: url(img/axeAvailable.png);
+  }
+
+  [weapon="meleeAvailable"] {
+    background: url(img/meleeAvailable.png);
+  }
