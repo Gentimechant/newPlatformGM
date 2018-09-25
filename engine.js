@@ -25,10 +25,6 @@ $(function() {
     }
    
     function switchPlayer() {
-        let myTimer;
-        // function countTime() {
-        //     let myTimer = setTimeout(function(){nextRound();}, 14000);
-        // }
         
         function timeOut(player, position) {
             if (player.position != position) {
@@ -44,20 +40,11 @@ $(function() {
               joueur2.availableCase();
               let myOldPosition = joueur2.position;
               joueur2.move();
-            //   let myTimer = setTimeout(timeOut(joueur2, myPosition), 14000);             
-            //   countTime();
-            //   timeOut(joueur2, myPosition);
 
             setTimeout(function(){					
-                // if (joueur2.canPlay === false) {
                 console.log(myOldPosition);
                 console.log(joueur2.position);
-                if (joueur2.position != myOldPosition) {
-                clearTimeout();
-                }
                   nextRound();
-                
-                // }
               }, 9000);
             
   
@@ -67,18 +54,11 @@ $(function() {
               joueur1.availableCase();
               let myOldPosition = joueur1.position;
               joueur1.move();
-            //   let myTimer = setTimeout(timeOut(joueur1, myPosition), 14000);
-            //   countTime();
-            //   timeOut(joueur1, myPosition);
 
             setTimeout(function(){					
-                // if (joueur2.canPlay === false) {
                 console.log(myOldPosition);
                 console.log(joueur1.position);
-                
                   nextRound();
-                
-                // }
             }, 9000);
 
               

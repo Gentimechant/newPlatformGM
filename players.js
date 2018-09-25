@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 class Player {
-    constructor(life, movePoint, damage, weapon, numero, canPlay, position) {
+    constructor(life, damage, weapon, numero, canPlay, position) {
         this.life = life;
         this.damage = damage;
         this.weapon = weapon;
