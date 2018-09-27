@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 class Player {
-    constructor(life, damage, weapon, numero, canPlay, position) {
+    constructor(life, infoManquante, damage, weapon, numero, canPlay, position) { // à revoir infoManquante
         this.life = life;
         this.damage = damage;
         this.weapon = weapon;
@@ -120,7 +120,7 @@ class Player {
 
           }
 
-         });
+          });
 
 
         }
