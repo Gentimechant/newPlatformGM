@@ -17,30 +17,37 @@ class Player {
           console.log(this.position);
     }
 
+    displayInfos(){
+      $("#life-player" + this.numero).text("Life : " + this.life);
+      $("#weapon-player" + this.numero).text("Weapon : " + this.weapon.name);
+      $("#damage-weap" + this.numero).text("Damage : " + this.damage);
+      $("#skin-weap" + this.numero).html("<img src=" + this.weapon.skin + " alt=" + this.weapon.name + ">");
+
+    }
+
     availableCase(){
-      let positionId = Number($(this.position).attr("id")); // position actuelle
+      let positionId = Number($(this.position).attr("id")); // position actuelle <img src="" alt="">
       //TODO factoriser c'est 4 boucles for()
 
         if (this.canPlay) {
         //   // on vérifie les cases de droite
           for (let i = 1; i < 4; i++) {
             let rightCaseAvailable = $("td[id='"+ (positionId + i) +"']");
-            if (rightCaseAvailable !== null  && rightCaseAvailable.hasClass("square free left-border") === false && freeCases(rightCaseAvailable) === true || rightCaseAvailable.attr("weapon") ) {
+            if (rightCaseAvailable !== null  && rightCaseAvailable.hasClass("left-border") === false && freeCases(rightCaseAvailable) === true || rightCaseAvailable.attr("weapon") && rightCaseAvailable.hasClass("left-border") === false ) {
               if (rightCaseAvailable.attr("weapon")) {
                 $("td[id='"+ (positionId + i) +"']").addClass("availableCase").attr("weapon", scanWeapon(rightCaseAvailable));
               } else {
                 $("td[id='"+ (positionId + i) +"']").addClass("availableCase");
               }
-
-
             } else {
               break;
             }
           }
+          
           // on vérifie les cases de gauche
           for (let i = 1; i < 4; i++) {
             let leftCaseAvailable = $("td[id='"+ (positionId - i) +"']");
-            if (leftCaseAvailable !== null  && leftCaseAvailable.hasClass("square free right-border") === false && freeCases(leftCaseAvailable) === true || leftCaseAvailable.attr("weapon") ) {
+            if (leftCaseAvailable !== null  && leftCaseAvailable.hasClass("right-border") === false && freeCases(leftCaseAvailable) === true || leftCaseAvailable.attr("weapon") && leftCaseAvailable.hasClass("right-border") === false ) {
               if (leftCaseAvailable.attr("weapon")) {
                 $("td[id='"+ (positionId - i) +"']").addClass("availableCase").attr("weapon", scanWeapon(leftCaseAvailable));
               } else {
@@ -53,7 +60,7 @@ class Player {
           // on vérifie les cases du haut
           for (let i = 1; i < 4; i++) {
             let topCaseAvailable = $("td[id='"+ (positionId - i * 10) +"']");
-            if (topCaseAvailable !== null  && topCaseAvailable.hasClass("square free bot-border") === false && freeCases(topCaseAvailable) === true || topCaseAvailable.attr("weapon") ) {
+            if (topCaseAvailable !== null  && topCaseAvailable.hasClass("bot-border") === false && freeCases(topCaseAvailable) === true || topCaseAvailable.attr("weapon") && topCaseAvailable.hasClass("bot-border") === false ) {
               if (topCaseAvailable.attr("weapon")) {
                 $("td[id='"+ (positionId - i * 10) +"']").addClass("availableCase").attr("weapon", scanWeapon(topCaseAvailable));
               } else {
@@ -66,7 +73,7 @@ class Player {
           // on vérifie les cases du bas
           for (let i = 1; i < 4; i++) {
             let botCaseAvailable = $("td[id='"+ (positionId + i * 10) +"']");
-            if (botCaseAvailable !== null  && botCaseAvailable.hasClass("square free top-border") === false && freeCases(botCaseAvailable) === true || botCaseAvailable.attr("weapon") ) {
+            if (botCaseAvailable !== null  && botCaseAvailable.hasClass("top-border") === false && freeCases(botCaseAvailable) === true || botCaseAvailable.attr("weapon")  && botCaseAvailable.hasClass("top-border") === false ) {
               if (botCaseAvailable.attr("weapon")) {
                 $("td[id='"+ (positionId + i * 10) +"']").addClass("availableCase").attr("weapon", scanWeapon(botCaseAvailable));
               } else {
@@ -89,6 +96,7 @@ class Player {
 
        let positionId = this.position; // position actuelle
        let character = "square-character" + this.numero;
+       let oldweapon = this.weapon.name;
 
        if (this.canPlay) {
          const that = this; 
@@ -99,37 +107,40 @@ class Player {
            positionId = this;
            $(positionId).removeClass("free").addClass(character);
            that.position = positionId;           
-          if ($(that.position).attr("weapon")) { // vérifie s'il y a un arme et remplace si oui
-            let oldweapon = that.weapon;
+          if ($(that.position).attr("weapon")) { // vérifie s'il y a un arme et remplace si oui            
                 if ($(that.position).attr("weapon") === "axeAvailable") {
                     that.weapon = axe;
-                    $(that.position).attr("weapon", "melee");
+                    that.damage = that.weapon.damage;
+                    $(that.position).attr("weapon", oldweapon);
                 } else if ($(that.position).attr("weapon") === "shovelAvailable") {
                     that.weapon = shovel;
-                    $(that.position).attr("weapon", "melee");
+                    that.damage = that.weapon.damage;
+                    $(that.position).attr("weapon", oldweapon);
                 } else if ($(that.position).attr("weapon") === "swordAvailable") {
                     that.weapon = sword;
-                    $(that.position).attr("weapon", "melee");
+                    that.damage = that.weapon.damage;
+                    $(that.position).attr("weapon", oldweapon);
                 } else if ($(that.position).attr("weapon") === "hammerAvailable") {
                     that.weapon = hammer;
-                    $(that.position).attr("weapon", "melee");
+                    that.damage = that.weapon.damage;
+                    $(that.position).attr("weapon", oldweapon);
                 } else if ($(that.position).attr("weapon") === "meleeAvailable") {
-                  that.weapon = melee;
-                  $(that.position).attr("weapon", oldweapon.name);  // à corriger, CSS (arme qui s'affiche, non pas character)
+                    that.weapon = melee;
+                    that.damage = that.weapon.damage;
+                    $(that.position).attr("weapon", oldweapon);  // à corriger, CSS (arme qui s'affiche, non pas character)
                 } // penser à faire un feed-back sur les côtés (infos joueurs)
-
-          }
-
+            }
+          this.displayInfos();
           });
-
 
         }
 
       }
+
 }
 
-let joueur1 = new Player(100, 3, 10, "img/sword.png", "1");
-let joueur2 = new Player(100, 3, 10, "img/sword.png", "2");
+let joueur1 = new Player(100, 3, 10, melee, "1");
+let joueur2 = new Player(100, 3, 10, melee, "2");
 
 
 

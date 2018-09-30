@@ -14,7 +14,9 @@ $(function() {
     const playerOne = $("td[data-y='0'][class*='free']");
     const playerTwo = $("td[data-y='9'][class*='free']");
     joueur1.spawn(playerOne);
+    joueur1.displayInfos();
     joueur2.spawn(playerTwo);
+    joueur2.displayInfos();
 
   
     let round = 1;
@@ -38,28 +40,26 @@ $(function() {
               joueur2.canPlay = true;
               joueur1.canPlay = false;
               joueur2.availableCase();
+              joueur2.displayInfos();
               let myOldPosition = joueur2.position;
               joueur2.move();
 
-            setTimeout(function(){					
-                console.log(myOldPosition);
-                console.log(joueur2.position);
+            setTimeout(function(){
                   nextRound();
-              }, 9000);
+              }, 5000);
             
   
           } else {
               joueur1.canPlay = true;
               joueur2.canPlay = false;
               joueur1.availableCase();
+              joueur1.displayInfos();
               let myOldPosition = joueur1.position;
               joueur1.move();
 
-            setTimeout(function(){					
-                console.log(myOldPosition);
-                console.log(joueur1.position);
+            setTimeout(function(){
                   nextRound();
-            }, 9000);
+            }, 5000);
 
               
           }

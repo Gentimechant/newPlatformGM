@@ -18,7 +18,6 @@ class Board {
         let indexX = row;
           for (let col = 0; col < this.Cols; col++) { // crée les colonnes
             const $col = $("<td>") // coord X
-              .addClass("square")
               .addClass("free")
               .attr("data-x", col)
               .attr("data-y", indexX);
@@ -26,24 +25,24 @@ class Board {
   
             if (indexX === 0) {
               if (indexX === 0 && indexY === 0) {
-                $col.addClass("left-border top-border"); //  en plus la cologne de gauche
+                $col.addClass("left-border top-border"); //  en plus la colonne de gauche
               } else if (indexX === 0 && indexY === 9) {
-                $col.addClass("right-border top-border"); //  en plus la cologne de droite
+                $col.addClass("right-border top-border"); //  en plus la colonne de droite
               } else {
                 $col.addClass("top-border"); //  la ligne du dessus
               }
             } else if (indexY === 0) {
-                $col.addClass("left-border"); //  la cologne de gauche
+                $col.addClass("left-border"); //  la colonne de gauche
             } else if (indexX === 9) {
               if (indexX === 9 && indexY === 0) {
-                $col.addClass("left-border bot-border"); //  en plus la cologne de gauche
+                $col.addClass("left-border bot-border"); //  en plus la colonne de gauche
               } else if (indexX === 9 && indexY === 9) {
-                $col.addClass("right-border bot-border"); //  en plus la cologne de droite
+                $col.addClass("right-border bot-border"); //  en plus la colonne de droite
               } else {
                 $col.addClass("bot-border"); //  la ligne du dessus
               }
             } else if (indexY === 9) {
-                $col.addClass("right-border"); // la cologne de droite
+                $col.addClass("right-border"); // la colonne de droite
             }
             $col.attr("id", ((indexX * 10) + indexY)); // ajoute un id de 0 à 99 (cases)
             $row.append($col);
