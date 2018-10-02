@@ -23,6 +23,19 @@ const sword = new Weapon("sword", 20, "img/sword1.png");
 const shovel = new Weapon("shovel", 30, "img/shovel.png");
 const hammer = new Weapon("hammer", 20, "img/hammer.png");
 
+function attrWeapon(weapon) {
+  if (weapon.attr("weapon") === "sword") {
+    return sword;
+  } else if (weapon.attr("weapon") === "shovel"){
+    return shovel;
+  } else if (weapon.attr("weapon") === "hammer") {
+    return hammer;
+  } else if (weapon.attr("weapon") === "axe") {
+    return axe;
+  } else if (weapon.attr("weapon") === "melee") {
+    return melee;
+  }
+}
 
 function scanWeapon(weapon) {
   if (weapon.attr("weapon") === "sword") {

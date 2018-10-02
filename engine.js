@@ -14,9 +14,9 @@ $(function() {
     const playerOne = $("td[data-y='0'][class*='free']");
     const playerTwo = $("td[data-y='9'][class*='free']");
     joueur1.spawn(playerOne);
-    // joueur1.displayInfos();
+    joueur1.displayInfos();
     joueur2.spawn(playerTwo);
-    // joueur2.displayInfos();
+    joueur2.displayInfos();
     joueur1.name = "Spartacus";
     joueur2.name = "Conan";
     
@@ -55,6 +55,7 @@ $(function() {
               let numPlayer = joueur2.numero;
               let myOldPosition = joueur2.position;
               joueur2.displayInfos();
+              $("#can-play" + joueur2.numero).text("YOU CAN PLAY");
               if (joueur1.behavior != 0) {
                 joueur2.fight(joueur1);
                 // gameOver(joueur2); 
@@ -71,6 +72,7 @@ $(function() {
               let numPlayer = joueur1.numero;
               let myOldPosition = joueur1.position;
               joueur1.displayInfos();
+              $("#can-play" + joueur1.numero).text("YOU CAN PLAY");
               if (joueur2.behavior != 0) {
                 joueur1.fight(joueur2);
                 // gameOver(joueur1);  

@@ -24,7 +24,6 @@ class Player {
       $("#weapon-player" + this.numero).text("Weapon : " + this.weapon.name);
       $("#damage-weap" + this.numero).text("Damage : " + this.damage);
       $("#skin-weap" + this.numero).html("<img src=" + this.weapon.skin + " alt=" + this.weapon.name + ">");
-      $("#can-play" + this.numero).text("YOU CAN PLAY");
 
     }
 
@@ -103,46 +102,30 @@ class Player {
 
        if (this.canPlay) {
          const that = this; 
-         const $board = $(".availableCase");
+         const $board = $(".availableCase"); // récupère tous les cases 
          $board.click(function(){
-          //  for (let i = 0; i < $board.length; i++) {
-          //    if ($board[i].attr("weapon")) {
-          //      let element2 = toggleWeapon($board[i]);
-          //      $board[i].off("click");
-          //      $board[i].attr("weapon", element2);
-          //      $board[i].removeClass("availableCase");
-          //    } else {
-          //     $board[i].off("click").removeClass("availableCase").addClass("free");
-          //    }
-             
-          //  }
-           $board.off("click").removeClass("availableCase").addClass("free");
+           for (let i = 0; i < $board.length; i++) {
+             let cases = $($board[i]); // sauvegarde chaque case
+             if (cases.attr("weapon")) {
+               let element2 = toggleWeapon(cases); // scan l'arme et inverse 
+               cases.off("click");
+               cases.attr("weapon", element2);
+               cases.removeClass("availableCase");
+             } else {
+              cases.off("click").removeClass("availableCase").addClass("free");
+             } 
+           }
            $(positionId).removeClass(character).addClass("free"); // enleve l'ancienne position
            positionId = this;
            $(positionId).removeClass("free").addClass(character);
            that.position = positionId;           
           if ($(that.position).attr("weapon")) { // vérifie s'il y a un arme et remplace si oui            
-                if ($(that.position).attr("weapon") === "axeAvailable") {
-                    that.weapon = axe;
-                    that.damage = that.weapon.damage;
-                    $(that.position).attr("weapon", oldweapon);
-                } else if ($(that.position).attr("weapon") === "shovelAvailable") {
-                    that.weapon = shovel;
-                    that.damage = that.weapon.damage;
-                    $(that.position).attr("weapon", oldweapon);
-                } else if ($(that.position).attr("weapon") === "swordAvailable") {
-                    that.weapon = sword;
-                    that.damage = that.weapon.damage;
-                    $(that.position).attr("weapon", oldweapon);
-                } else if ($(that.position).attr("weapon") === "hammerAvailable") {
-                    that.weapon = hammer;
-                    that.damage = that.weapon.damage;
-                    $(that.position).attr("weapon", oldweapon);
-                } else if ($(that.position).attr("weapon") === "meleeAvailable") {
-                    that.weapon = melee;
-                    that.damage = that.weapon.damage;
-                    $(that.position).attr("weapon", oldweapon);  // à corriger, CSS (arme qui s'affiche, non pas character)
-                } 
+                let weapToUse = attrWeapon($(that.position));
+                that.weapon = weapToUse;
+                that.damage = that.weapon.damage;
+                $(that.position).attr("weapon", oldweapon);
+                that.displayInfos();
+
             }
             let playerCheck = "";
             if (that.numero === "1") {
@@ -217,24 +200,6 @@ function freeCases(casesToCheck){ // fonction pour vérifier si la case est libr
 
 function random(tab){ // pick au hasard une case
   return tab[Math.trunc(Math.random() * tab.length)];
-}
-
-function randomCases(player){ // met au hasard un player
-  for (var i = 0; i < player.length; i++) {
-    let free = $(player[i]).hasClass("free");
-    if (free) {
-      return random(player);
-    } else {
-      return false;
-    }
-  }
-}
-
-function randomFreeCases(){
-  const freeCases = $("td.free");
-  for (var i = 0; i < freeCases.length; i++) {
-    return freeCases[Math.trunc(Math.random() * freeCases.length)];
-  }
 }
 
 function otherPlayer(position, check) {

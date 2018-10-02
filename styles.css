@@ -4,11 +4,18 @@ body{
   .container{
     display: flex;
     justify-content: space-around;
+    font-family: 'Cinzel Decorative', cursive;
+    color: black;
+    text-align: center;
     margin: auto;
     /* padding: 20px 0px 20px 0px; */
     border: solid grey 1px; /* à retirer */
     /* background-color: red; */
   
+  }
+  .display{
+    color: red;
+    font-size: 40px;
   }
   
   .avatar{
@@ -25,6 +32,7 @@ body{
   button{
     display: inline-block;
     color: #bd986b;
+    font-size: 20px;
     width: 120px;
     height: 40px;
     margin: 10px 0 0 50px;
