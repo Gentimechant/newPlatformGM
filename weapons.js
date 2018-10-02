@@ -18,10 +18,10 @@ class Weapon {
 
 
 const melee = new Weapon("melee", 10, "img/melee.png");
-const axe = new Weapon("axe", 20, "img/axe.png");
-const sword = new Weapon("sword", 15, "img/sword1.png");
-const shovel = new Weapon("shovel", 25, "img/shovel.png");
-const hammer = new Weapon("hammer", 5, "img/hammer.png");
+const axe = new Weapon("axe", 30, "img/axe.png");
+const sword = new Weapon("sword", 20, "img/sword1.png");
+const shovel = new Weapon("shovel", 30, "img/shovel.png");
+const hammer = new Weapon("hammer", 20, "img/hammer.png");
 
 
 function scanWeapon(weapon) {

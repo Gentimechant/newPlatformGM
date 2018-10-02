@@ -14,9 +14,9 @@ $(function() {
     const playerOne = $("td[data-y='0'][class*='free']");
     const playerTwo = $("td[data-y='9'][class*='free']");
     joueur1.spawn(playerOne);
-    joueur1.displayInfos();
+    // joueur1.displayInfos();
     joueur2.spawn(playerTwo);
-    joueur2.displayInfos();
+    // joueur2.displayInfos();
 
   
     let round = 1;
@@ -25,43 +25,60 @@ $(function() {
         round++;
         switchPlayer();
     }
-   
-    function switchPlayer() {
-        
-        function timeOut(player, position) {
-            if (player.position != position) {
-                clearTimeout();
-                nextRound();
-            }
+    function timeOut(player, position) {
+        if (player.position != position) {
+            clearTimeout();
+            nextRound();
         }
-    
+    }
+    function setTime() {
+        setTimeout(function(){
+            nextRound();
+        }, 5000);  
+    }
+
+    // function gameOver(player) {
+    //     if (player.life <= 0) {
+    //         alert(player.name + ": YOU LOSE");
+    //     } else {
+    //         setTime();
+    //     }
+    // }
+    function switchPlayer() {
         //si le tour est un nombre pair alors c'est le joueur 2 qui peut joueur sinon le joueur 1
           if (round % 2 === 0) {
               joueur2.canPlay = true;
               joueur1.canPlay = false;
-              joueur2.availableCase();
-              joueur2.displayInfos();
+              let numPlayer = joueur2.numero;
               let myOldPosition = joueur2.position;
-              joueur2.move();
-
-            setTimeout(function(){
-                  nextRound();
-              }, 5000);
-            
+              joueur2.displayInfos();
+              if (joueur1.behavior != 0) {
+                joueur2.fight(joueur1);
+                // gameOver(joueur2); 
+                setTime();  
+              } else {
+                joueur2.availableCase(); 
+                joueur2.move();
+                setTime(); 
+              } 
   
           } else {
               joueur1.canPlay = true;
               joueur2.canPlay = false;
-              joueur1.availableCase();
-              joueur1.displayInfos();
+              let numPlayer = joueur1.numero;
               let myOldPosition = joueur1.position;
-              joueur1.move();
+              joueur1.displayInfos();
+              if (joueur2.behavior != 0) {
+                joueur1.fight(joueur2);
+                // gameOver(joueur1);  
+                setTime();
+              } else {
+                joueur1.availableCase(); 
+                joueur1.move();
+                setTime(); 
+              }
 
-            setTimeout(function(){
-                  nextRound();
-            }, 5000);
-
-              
+ 
           }
     }
       switchPlayer();

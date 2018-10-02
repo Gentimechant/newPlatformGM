@@ -1,16 +1,18 @@
 /*jshint esversion: 6 */
 
 class Player {
-    constructor(life, infoManquante, damage, weapon, numero, canPlay, position) { // à revoir infoManquante
+    constructor(life, behavior, damage, weapon, numero, canPlay, position, name) { 
         this.life = life;
+        this.behavior = 0; // 1 = attack ; 2 = defense ; 3 = beginFight
         this.damage = damage;
         this.weapon = weapon;
         this.numero = numero; // id du joueur
         this.canPlay = canPlay; // true or false
         this.position = position; // case de la position à revoir
+        this.name = name;
     }
     spawn(playerZ) {
-      //Fait spawn le joueur sur une case ou il n'y à rien  playerOne[Math.trunc(Math.random() * playerOne.length)]
+      //Fait spawn le joueur sur une case ou il n'y à rien
           const randomPlayer = playerZ[Math.trunc(Math.random() * playerZ.length)];
           $(randomPlayer).removeClass("free").addClass("square-character" + this.numero);
           this.position = randomPlayer;
@@ -22,11 +24,12 @@ class Player {
       $("#weapon-player" + this.numero).text("Weapon : " + this.weapon.name);
       $("#damage-weap" + this.numero).text("Damage : " + this.damage);
       $("#skin-weap" + this.numero).html("<img src=" + this.weapon.skin + " alt=" + this.weapon.name + ">");
+      $("#can-play" + this.numero).text("YOU CAN PLAY");
 
     }
 
     availableCase(){
-      let positionId = Number($(this.position).attr("id")); // position actuelle <img src="" alt="">
+      let positionId = Number($(this.position).attr("id")); // position actuelle
       //TODO factoriser c'est 4 boucles for()
 
         if (this.canPlay) {
@@ -130,17 +133,67 @@ class Player {
                     $(that.position).attr("weapon", oldweapon);  // à corriger, CSS (arme qui s'affiche, non pas character)
                 } // penser à faire un feed-back sur les côtés (infos joueurs)
             }
-          this.displayInfos();
+            let playerCheck = "";
+            if (that.numero === "1") {
+              playerCheck = "square-character2";
+            } else {
+              playerCheck = "square-character1";
+            }
+             
+            if (otherPlayer(that.position, playerCheck)) {
+              that.behavior = 3;
+              alert("Death Match Begin!!! "); 
+            }
+            let numPlayer = that.numero;
+            clearPlayerDisplay(numPlayer);
+            
           });
-
+          
         }
 
       }
+    
+    fight(enemy){
+      let that = this;
+      let playerBehavior = enemy.behavior;
+      let playerDamage = enemy.damage;
+      $('#attack'+ this.numero).on('click', function(){			//event onclick attaque pour le joueur 
+				$('#attack'+ that.numero).off('click');
+        $('#defense'+ that.numero).off('click');
+        that.behavior = 1;
+        if (playerBehavior === 1) {
+          that.life -= playerDamage;
+          that.displayInfos();
+          if (that.life <= 0) {
+            alert("Joueur " + that.numero + " : YOU LOSE!");
+          } else {
+            let numPlayer = that.numero;
+            clearPlayerDisplay(numPlayer);
+          }
+        }
+        
+      });
+      $('#defense'+ this.numero).on('click', function(){			//event onclick defense pour le joueur 
+				$('#attack'+ that.numero).off('click');
+        $('#defense'+ that.numero).off('click');
+        that.behavior = 2;
+        if (playerBehavior === 1) {
+          that.life -= (playerDamage/2);
+          that.displayInfos();
+          if (that.life <= 0) {
+            alert("Joueur " + that.numero + " : YOU LOSE!");
+          } else {
+            let numPlayer = that.numero;
+            clearPlayerDisplay(numPlayer);
+          }
+        }
+      });
+    }
 
 }
 
-let joueur1 = new Player(100, 3, 10, melee, "1");
-let joueur2 = new Player(100, 3, 10, melee, "2");
+let joueur1 = new Player(100, 3, 10, melee, "1"); // "Spartacus"
+let joueur2 = new Player(100, 3, 10, melee, "2"); // "Conan"
 
 
 
@@ -172,4 +225,50 @@ function randomFreeCases(){
   for (var i = 0; i < freeCases.length; i++) {
     return freeCases[Math.trunc(Math.random() * freeCases.length)];
   }
+}
+
+function otherPlayer(position, check) {
+  let positionId = Number($(position).attr("id")); // position actuelle
+
+          // on vérifie les cases de droite
+          for (let i = 1; i < 4; i++) {
+            let rightCaseAvailable = $("td[id='"+ (positionId + i) +"']");
+            if (rightCaseAvailable.hasClass(check)){
+              return true;
+            } else {
+              break;
+            }
+          }
+          
+          // on vérifie les cases de gauche
+          for (let i = 1; i < 4; i++) {
+            let leftCaseAvailable = $("td[id='"+ (positionId - i) +"']");
+            if (leftCaseAvailable.hasClass(check)){
+              return true;
+            } else {
+              break;
+            }
+          }
+          // on vérifie les cases du haut
+          for (let i = 1; i < 4; i++) {
+            let topCaseAvailable = $("td[id='"+ (positionId - i * 10) +"']");
+            if (topCaseAvailable.hasClass(check)){
+              return true;
+            } else {
+              break;
+            }
+          }
+          // on vérifie les cases du bas
+          for (let i = 1; i < 4; i++) {
+            let botCaseAvailable = $("td[id='"+ (positionId + i * 10) +"']");
+            if (botCaseAvailable.hasClass(check)){
+              return true;
+            } else {
+              break;
+            }
+          }
+}
+
+function clearPlayerDisplay(numero) {
+  $("#can-play" + numero).text("");
 }
