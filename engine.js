@@ -17,6 +17,9 @@ $(function() {
     // joueur1.displayInfos();
     joueur2.spawn(playerTwo);
     // joueur2.displayInfos();
+    joueur1.name = "Spartacus";
+    joueur2.name = "Conan";
+    
 
   
     let round = 1;
@@ -36,7 +39,7 @@ $(function() {
             nextRound();
         }, 5000);  
     }
-
+    
     // function gameOver(player) {
     //     if (player.life <= 0) {
     //         alert(player.name + ": YOU LOSE");
@@ -78,7 +81,6 @@ $(function() {
                 setTime(); 
               }
 
- 
           }
     }
       switchPlayer();

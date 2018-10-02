@@ -67,11 +67,11 @@ body{
   }
   
   
-  .square-character1 {
+  td.square-character1 {
       background: url(img/player1.png);
   }
   
-  .square-character2 {
+  td.square-character2 {
     background: url(img/player2.png);
   }
   

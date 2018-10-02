@@ -37,3 +37,18 @@ function scanWeapon(weapon) {
     return "meleeAvailable";
   }
 }
+
+function toggleWeapon(weap) {
+  if (weap.attr("weapon") === "swordAvailable") {
+    return "sword";
+  } else if (weap.attr("weapon") === "shovelAvailable"){
+    return "shovel";
+  } else if (weap.attr("weapon") === "hammerAvailable") {
+    return "hammer";
+  } else if (weap.attr("weapon") === "axeAvailable") {
+    return "axe";
+  } else if (weap.attr("weapon") === "meleeAvailable") {
+    return "melee";
+  }
+  
+}

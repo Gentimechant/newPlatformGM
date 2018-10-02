@@ -105,6 +105,17 @@ class Player {
          const that = this; 
          const $board = $(".availableCase");
          $board.click(function(){
+          //  for (let i = 0; i < $board.length; i++) {
+          //    if ($board[i].attr("weapon")) {
+          //      let element2 = toggleWeapon($board[i]);
+          //      $board[i].off("click");
+          //      $board[i].attr("weapon", element2);
+          //      $board[i].removeClass("availableCase");
+          //    } else {
+          //     $board[i].off("click").removeClass("availableCase").addClass("free");
+          //    }
+             
+          //  }
            $board.off("click").removeClass("availableCase").addClass("free");
            $(positionId).removeClass(character).addClass("free"); // enleve l'ancienne position
            positionId = this;
@@ -131,7 +142,7 @@ class Player {
                     that.weapon = melee;
                     that.damage = that.weapon.damage;
                     $(that.position).attr("weapon", oldweapon);  // à corriger, CSS (arme qui s'affiche, non pas character)
-                } // penser à faire un feed-back sur les côtés (infos joueurs)
+                } 
             }
             let playerCheck = "";
             if (that.numero === "1") {
@@ -165,13 +176,12 @@ class Player {
           that.life -= playerDamage;
           that.displayInfos();
           if (that.life <= 0) {
-            alert("Joueur " + that.numero + " : YOU LOSE!");
-          } else {
-            let numPlayer = that.numero;
-            clearPlayerDisplay(numPlayer);
+            that.life = 0;
+            alert(that.name + " : YOU LOSE!");
           }
         }
-        
+        let numPlayer = that.numero;
+        clearPlayerDisplay(numPlayer);
       });
       $('#defense'+ this.numero).on('click', function(){			//event onclick defense pour le joueur 
 				$('#attack'+ that.numero).off('click');
@@ -181,12 +191,12 @@ class Player {
           that.life -= (playerDamage/2);
           that.displayInfos();
           if (that.life <= 0) {
-            alert("Joueur " + that.numero + " : YOU LOSE!");
-          } else {
-            let numPlayer = that.numero;
-            clearPlayerDisplay(numPlayer);
+            that.life = 0;
+            alert(that.name + " : YOU LOSE!");
           }
         }
+        let numPlayer = that.numero;
+        clearPlayerDisplay(numPlayer);
       });
     }
 
