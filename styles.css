@@ -9,7 +9,7 @@ body{
     text-align: center;
     margin: auto;
     /* padding: 20px 0px 20px 0px; */
-    border: solid grey 1px; /* à retirer */
+    /* border: solid grey 1px; à retirer */
     /* background-color: red; */
   
   }
@@ -26,7 +26,7 @@ body{
   .descriptif{
     width: auto;
     height: 310px;
-    border:solid grey 1px ; /* à retirer */
+    /* border:solid grey 1px ; à retirer */
   }
   
   button{
@@ -41,7 +41,7 @@ body{
   #player1{
     width: 400px;
     height: 540px;
-    border:solid grey 1px ; /* à retirer */
+    /* border:solid grey 1px ; à retirer */
     margin-left: 20px;
     /* padding: 80px; */
     float: left;
@@ -51,7 +51,7 @@ body{
   #player2{
     width: 400px; /* 320 */
     height: 540px; /* 460 */
-    border: 1px solid grey; /* à retirer */
+    /* border: 1px solid grey; à retirer */
     margin-right: 20px;
     float: left;
     background-image: url(img/bgplayer2.png);

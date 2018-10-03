@@ -2,10 +2,6 @@
 
 $(function() {
     const board = new Board(10, 10, ".gameArea");
-    const freeCases = $("td[class*='free']");
-
-    let weapons = [melee, axe, sword, shovel, hammer];
-    let players = [joueur1, joueur2];
 
     axe.spawn();
     sword.spawn();
@@ -19,9 +15,7 @@ $(function() {
     joueur2.displayInfos();
     joueur1.name = "Spartacus";
     joueur2.name = "Conan";
-    
 
-  
     let round = 1;
     //fonction qui incrémente le nombre de tour
     function nextRound() {
@@ -40,13 +34,6 @@ $(function() {
         }, 5000);  
     }
     
-    // function gameOver(player) {
-    //     if (player.life <= 0) {
-    //         alert(player.name + ": YOU LOSE");
-    //     } else {
-    //         setTime();
-    //     }
-    // }
     function switchPlayer() {
         //si le tour est un nombre pair alors c'est le joueur 2 qui peut joueur sinon le joueur 1
           if (round % 2 === 0) {
