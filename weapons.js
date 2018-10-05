@@ -7,7 +7,6 @@ class Weapon {
         this.skin = skin;
     }
     spawn() {
-      // const randomPlayer = playerZ[Math.trunc(Math.random() * playerZ.length)];
       const place = $("td[class*='free']");
       const random = place[Math.trunc(Math.random() * place.length)];
 

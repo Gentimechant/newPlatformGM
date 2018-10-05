@@ -7,10 +7,8 @@ class Board {
       this.selector = selector;
       this.createBoard();
       this.obstacleCases();
-      // this.spawnWeapons();
     }
   
-    // const col = $(this).data('col') ==> need this when we setup the new position
     createBoard(){
       const $board = $(this.selector);
       for (let row = 0; row < this.Rows; row++) { // crée les rangés
@@ -57,7 +55,6 @@ class Board {
         for (let i = 0; i < percent; i++) {
           const random = $("td")[Math.trunc(Math.random() * 100)];
           $(random).removeClass("free").addClass("square-inaccessible");
-          // console.log(random);
         }
     }
 
